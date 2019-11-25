@@ -18,16 +18,16 @@
 enum controlData {N_ITERATIONS = 2500};
 
 //static DigitalOut led_app_red(D5);
-//AnalogIn pot1(A0); // Pot 1 - Left
+AnalogIn pot1(A0); // Pot 1 - Left
 //AnalogIn pot2(A1); // Pot 2 - Right
-//float pot1Val;
+float pot1Val;
 //float pot2Val;
-//DigitalIn joystick[5] = {D4, A2, A3, A4, A5};
-//char joystickVal;
-//MMA7660 accel(D14, D15);
-//float accelVal[3];
-//LM75B temp(D14, D15);
-//float tempVal;
+DigitalIn joystick[5] = {D4, A2, A3, A4, A5};
+int joystickVal[5];
+MMA7660 accel(D14, D15);
+float accelVal[3];
+LM75B temp(D14, D15);
+float tempVal;
 static DigitalOut red(LED_RED);
 static DigitalIn sw3(PTA4);
 C12832 lcd(D11, D13, D12, D7, D10);
@@ -70,8 +70,22 @@ int main(void) {
     for (int i = N_ITERATIONS; i > 0; i-=1) {
       counterStart();
       /********* Software under test *********************/
-      lcd.locate(2, 8);
-      lcd.printf("Hello World!");
+      //lcd.locate(2, 8);
+      //pot1Val = pot1.read(); 
+      //lcd.printf("Hello World!");
+      /*for (int j = 0; j < 5; j = j + 1) {
+           joystickVal[j] = joystick[j];
+      }*/
+      //accelVal[0] = accel.x();
+      //accelVal[1] = accel.y();
+      //accelVal[2] = accel.z();
+      //tempVal = temp.read();
+      //pc.printf("Hello world\n");
+      int j = 0;
+      while (j < 5) {
+           joystickVal[j] = joystick[j];
+           j++;
+      }
       /********* End Software under test ****************/
       timeElapsed = counterStop();
       if (timeElapsed < minTime) {
